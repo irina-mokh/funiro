@@ -9,44 +9,63 @@
   	@@include('header.html')
     <main>
       <h1 class="visually-hidden">Furniture shop Funiro</h1>
-      <section class="hero-slider page__hero-slider">
+      <section class="page__main-slider">
         <h2 class="visually-hidden">Promotions</h2>
-        <div class="hero-slider__container">
-          <div class="hero-slider__content">
-            <h3>High-Quality
-              Furniture Just
-              For You</h3>
-            <p>Our furniture is made from selected and best quality materials that are suitable for your dream home</p>
-            <a href="#">Shop Now</a>
-          </div>
-          <div class="hero-slider__controls">
-            <div class="hero-slider__dots">
-              <button class="slider-dot"></button>
-              <button class="slider-dot"></button>
-              <button class="slider-dot"></button>
-              <button class="slider-dot"></button>
+        <div class="hero-slider">
+          <div class="hero-slider__body container">
+            <div class="hero-slider__content">
+              <h3 class="hero-slider__title">High-Quality
+                Furniture Just
+                For You</h3>
+              <p class="hero-slider__text">Our furniture is made from selected and best quality materials that are suitable for your dream home</p>
+              <a href="#" class="hero-slider__button">Shop Now</a>
             </div>
-            <div class="hero-slider__arrows">
-              <button class="slider-arrow arrow-prev"></button>
-              <button class="slider-arrow arrow-next"></button>
+            <div class="hero-slider__controls">
+              <div class="hero-slider__dots">
+                <button class="slider-dot"></button>
+                <button class="slider-dot slider-dot_active"></button>
+                <button class="slider-dot"></button>
+              </div>
+              <div class="hero-slider__arrows">
+                <button class="slider-arrow arrow-prev"></button>
+                <button class="slider-arrow arrow-next"></button>
+              </div>
+            </div>
+            <div class="hero-slider__wrapper">
+              <ul class="slider">
+                <li class="slide">
+                  <img class="hero-slider__img" src="img/main-slider/01.jpg" alt="blue sofa near the wall with posters">
+                  <div class="product-card">
+                    <h3 class="product__title">SkySofa</h3>
+                    <p class="product__desc">Luxury light blue sofa 2-seat</p>
+                    <p class="product__price">Rp 13000.000</p>
+                    <a href="#" class="product__link _icon-arrow-link"></a>
+                  </div>
+                </li>
+                <li class="slide">
+                  <img class="hero-slider__img" src="img/main-slider/02.jpg" alt="blue bohauss sofa with chair">
+                  <div class="product-card">
+                    <h3 class="product__title">Luxury big sofa 2-seat</h3>
+                    <p class="product__desc">Luxury big sofa 2-seat</p>
+                    <p class="product__price">Rp 17000.000</p>
+                    <a href="#" class="product__link _icon-arrow-link"></a>
+                  </div>
+                </li>
+                <li class="slide">
+                  <img class="hero-slider__img" src="img/main-slider/03.jpg" alt="Big double bed white">
+                  <div class="product-card">
+                    <h3 class="product__title">BigGoodBed</h3>
+                    <p class="product__desc">Elegant double bed</p>
+                    <p class="product__price">Rp 18000.000</p>
+                    <a href="#" class="product__link _icon-arrow-link"></a>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
-          <div>
-            <ul>
-              <li>
-                <img src="img/main-slider/01.jpg" alt="">
-              </li>
-              <li>
-                <img src="img/main-slider/02.jpg" alt="">
-              </li>
-              <li>
-                <img src="img/main-slider/03.jpg" alt="">
-              </li>
-            </ul>
-          </div>
-
         </div>
       </section>
     </main>
+    <script src="js/script.min.js"></script>
   </body>
 </html>
