@@ -45,6 +45,9 @@ sliderControls.forEach((dot) =>{
 });
 
 sliderRefresh(i);
+window.addEventListener("resize", function() {
+  sliderRefresh(i)
+});
 
 //Header fill for scroll
 let header = document.querySelector(".header");
