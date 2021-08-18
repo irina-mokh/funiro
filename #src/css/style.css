@@ -433,6 +433,14 @@
   position: relative;
   list-style: none;
   margin: 0 32px 0 0;
+  transition: all 0.3s ease 0s;
+}
+
+.slide_pseudo {
+  position: relative;
+  list-style: none;
+  margin: 0 32px 0 0;
+  overflow: visible;
 }
 
 .slide:last-child {
@@ -462,7 +470,7 @@
   .hero-slider__button {
     font-size: 20px;
   }
-  .hero-slider__controls {
+  .slider__controls {
     background-color: transparent;
   }
   .page__main-slider {
@@ -503,6 +511,12 @@
   bottom: 10px;
   right: 10px;
   padding: 15px;
+  display: none;
+}
+
+.hero-slider .slide_active .product-card {
+  display: block;
+  transition: all 1s ease-in 1s;
 }
   
 .product__title {
@@ -541,7 +555,7 @@
   color: var(--basic-apricot);
 }
 
-.hero-slider__controls {
+.slider__controls {
   z-index: 5;
   display: flex;
   justify-content: space-between;
@@ -552,7 +566,7 @@
   background-color: rgba(255, 255, 255, 0.72);
 }
 
-.hero-slider__dots {
+.slider__dots {
   display: flex;
   margin-left: 32px;
 }
@@ -597,11 +611,14 @@
   border: none;
   position: relative;
   cursor: pointer;
-  opacity: 0.7;
   transform: rotate(-90deg);
   font-size: 14px;
   padding-top: 5px;
   border: 1px solid var(--basic-apricot);
+}
+
+.hero-slider > .slider-arrow {
+  opacity: 0.7;
 }
 
 .arrow-prev{
@@ -834,6 +851,7 @@
 @media (min-width: 992px) {
   .page__heading {
     font-size: 36px;
+    text-align: center;
   }
 
   .product {
@@ -986,8 +1004,6 @@
   display: flex;
 }
 
-
-
 @media (min-width: 992px) {
   .rooms__header {
     flex: 0 0 var(--left-bar-width);
@@ -1006,23 +1022,170 @@
   .room__description {
     font-size: 28px;
   }
- 
-  .room {
-  }
-
-  .room_active {
-  }
 
   .rooms-slider > .slider-arrow.arrow-next {
     left: 45vw;
   }
 }
 
-.btn_white.slider-arrow{
+.rooms-slider .slider-arrow{
   opacity: 1;
   position: absolute;
   right: 20px;
   top: 50%;
+}
+
+/* Tips & Tricks*/
+.page__tips {
+  margin-top: 44px;
+}
+
+.tips-slider {
+  position: relative;
+  max-width: 1240px;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+
+.tip__title {
+  margin: 16px 16px 8px 16px;
+}
+
+.tip {
+  max-width: 391px;
+}
+
+.article {
+  text-decoration: none;
+  color: var(--gray-1);
+}
+
+.tip__date {
+  margin: 0 16px 8px 16px;
+}
+
+.tips-slider__list {
+  margin: 0 auto;
+  overflow: hidden;
+  padding-bottom: 20px;
+  padding-left: 35%;
+}
+
+.tips-slider .slide_active {
+  box-shadow: 0px 0px 20px 2px rgba(34, 60, 80, 0.2);
+}
+
+.tips-slider  .slider__arrows {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.tips-slider > .slider__dots {
+  position: absolute;
+  bottom: 10px;
+  left: 45%;
+}
+
+/*Gallery*/
+
+.page__share.gallery {
+  margin-top: 44px;
+}
+
+.gallery__text {
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.5;
+  color:var(--gray-2);
+  font-weight: 600;
+}
+
+.gallery__heading {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  margin: 8px;
+}
+
+.gallery__items {
+  display: grid;
+  grid-template-columns: auto;
+  grid-auto-flow: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.gallery__body {
+  overflow: hidden;
+}
+
+@media (any-hover: none) {
+  .gallery__body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (any-hover: hover) {
+  .gallery__items {
+    justify-content: center;
+  }
+}
+
+.gallery__col {
+  margin: 0;
+  padding: 0;
+}
+
+.gallery__col_center {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery__col:first-child .gallery__row {
+  justify-content: flex-end;
+}
+
+.gallery__col:last-child .gallery__row{
+  justify-content: flex-start;
+}
+
+.gallery__row {
+  display: flex;
+  padding: 0;
+}
+
+.gallery__row_top {
+  align-items: flex-end;
+}
+
+.gallery__row_btm {
+  align-items: flex-start;
+}
+
+.gallery__item {
+  list-style: none;
+  margin: 8px;
+  padding: 0;
+}
+
+.gallery__link {
+  display: block;
+}
+
+.gallery__pic {
+  display: block;
+  filter: grayscale(1);
+  transition: all .5s ease;
+}
+
+.gallery__pic:hover {
+  filter: none;
 }
 
 
