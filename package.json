@@ -8,18 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/irina-mokh/uber-eats.git"
+    "url": "git+https://github.com/irina-mokh/funiro.git"
   },
   "author": "irina-mokh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/irina-mokh/uber-eats/issues"
+    "url": "https://github.com/irina-mokh/funiro/issues"
   },
-  "homepage": "https://github.com/irina-mokh/uber-eats#readme",
+  "homepage": "https://github.com/irina-mokh/funiro#readme",
   "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
     "browser-sync": "^2.27.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-file-include": "^2.3.0",

@@ -157,3 +157,96 @@ gallery.addEventListener("mousemove", function (e) {
     gallery.classList.add("_init");
   }
 });
+
+// Catalog
+const moreBtn = document.querySelector('.show-more-btn');
+
+moreBtn.addEventListener("click", function(evt){
+  evt.preventDefault();
+  getProducts(moreBtn);
+});
+
+async function getProducts(btn) {
+  if(!btn.classList.contains("_hold")) {
+    btn.classList.add("_hold");
+    const file = "json/products.json";
+    let response = await fetch(file);
+    if (response.ok) {
+      let result = await response.json();
+      loadProducts(result);
+      btn.classList.remove("_hold");
+      btn.remove();
+    } else {
+      alert ("error");
+    }
+  }
+}
+
+function loadProducts(data) {
+  const catalog = document.querySelector(".catalog__list");
+
+  data.products.forEach(item => {
+    console.log(item.id);
+    const productID = item.id;
+    const productURL = item.url;
+    const productImg = item.image;
+    const productTitle = item.title;
+    const productText = item.text;
+    const productPrice = item.price;
+    const productOldPrice= item.priceOld;
+    const productShareURL = item.shareUrl;
+    const productLikeURL = item.likeUrl;
+    const productLabels = item.labels;
+
+    let productTemplateStart = `<li data-id="${productID}" class="product">`;
+			let productTemplateEnd = `</li>`;
+
+			let productTemplateLabels = '';
+			if (productLabels) {
+				let productTemplateLabelsStart = `<div class="labels">`;
+				let productTemplateLabelsEnd = `</div>`;
+				let productTemplateLabelsContent = '';
+
+				productLabels.forEach(labelItem => {
+					productTemplateLabelsContent += `<span class="label label_${labelItem.type}">${labelItem.value}</span>`;
+				});
+
+				productTemplateLabels += productTemplateLabelsStart;
+				productTemplateLabels += productTemplateLabelsContent;
+				productTemplateLabels += productTemplateLabelsEnd;
+			}
+
+			let productTemplateImage = `
+	    	<img class="product__img"src="img/products/${productImg}" alt="${productTitle}">
+	    `;
+
+			let productTemplateContent = `
+		    <div class="product__text">
+			    <h3 class="product__title">${productTitle}</h3>
+			    <p class="product__desc">${productText}</p>
+          <p class="product__price">${productPrice}</p>
+          <span class="product__price_old">${productOldPrice}</span>
+		    </div>
+    	`;
+
+			let productTemplateActions = `
+        <div class="product__layout"></div>
+        <div class="product__btns">
+          <button class="btn btn_white">Add to cart</button>
+          <a href="${productShareURL}" class="btn btn_share   _icon-share"><span class="btn__text">Share</  span></a>
+          <a href="${productLikeURL}" class="btn btn_fvrt   _icon-favorite"><span class="btn__text">Like</  span></a>
+        </div>
+	    `;
+
+			let productTemplate = '';
+			productTemplate += productTemplateStart;
+			productTemplate += productTemplateLabels;
+			productTemplate += productTemplateImage;
+			productTemplate += productTemplateContent;
+      productTemplate += productTemplateActions;
+			productTemplate += productTemplateEnd;
+
+
+      catalog.insertAdjacentHTML("beforeend", productTemplate);
+  })
+}

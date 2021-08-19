@@ -8,6 +8,7 @@ let path={
     js: project_folder + "/js/",
     img: project_folder + "/img/",
     fonts: project_folder + "/fonts/",
+    json: project_folder + "/json/",
   },
   src:{
     html: [source_folder + "/*.html","!" + source_folder + "/_*.html" ], // исключение файлов с _
@@ -15,12 +16,14 @@ let path={
     js: source_folder + "/js/script.js",
     img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
     fonts: source_folder + "/fonts/*.ttf",
+    json: source_folder + "/json/*.*",
   },
   watch:{
     html: source_folder + "/**/*.html",
     css: source_folder + "/css/**/*.css",
     js: source_folder + "/js/**/*.js",
     img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
+    json: source_folder + "/json/*.*",
   },
   clean: "./" + project_folder+"/"
 }
@@ -49,7 +52,10 @@ function browserSync(params) {
     notify: false
   })
 }
-
+function json() {
+  return src(path.src.json)
+    .pipe(dest(path.build.json))
+}
 function html() {
   return src(path.src.html)
     .pipe(fileinclude())
@@ -122,13 +128,14 @@ function watchFiles(params) {
   gulp.watch([path.watch.js], js),
   gulp.watch([path.watch.css], css),
   gulp.watch([path.watch.img], images);
+  gulp.watch([path.watch.json], json);
 }
 
 function clean(params) {
   return del(path.clean);
 }
 
-let build = gulp.series(clean, gulp.parallel(css, html, js, images, fonts));
+let build = gulp.series(clean, gulp.parallel(css, html, js, json, images, fonts));
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.fonts = fonts;
@@ -136,6 +143,7 @@ exports.images = images;
 exports.js = js;
 exports.css = css;
 exports.html = html;
+exports.json = json;
 exports.build = build;
 exports.watch = watch;
 exports.default = watch;
