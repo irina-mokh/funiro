@@ -158,7 +158,7 @@ gallery.addEventListener("mousemove", function (e) {
   }
 });
 
-// Catalog
+// Catalog "show more"
 const moreBtn = document.querySelector('.show-more-btn');
 
 moreBtn.addEventListener("click", function(evt){
@@ -232,7 +232,7 @@ function loadProducts(data) {
 			let productTemplateActions = `
         <div class="product__layout"></div>
         <div class="product__btns">
-          <button class="btn btn_white">Add to cart</button>
+          <button class="btn btn_white btn_buy">Add to cart</button>
           <a href="${productShareURL}" class="btn btn_share   _icon-share"><span class="btn__text">Share</  span></a>
           <a href="${productLikeURL}" class="btn btn_fvrt   _icon-favorite"><span class="btn__text">Like</  span></a>
         </div>
@@ -249,4 +249,103 @@ function loadProducts(data) {
 
       catalog.insertAdjacentHTML("beforeend", productTemplate);
   })
+}
+
+// cart
+const products = document.querySelectorAll(".product");
+const cart = document.querySelector(".cart");
+const cartCounter = document.querySelector(".cart__counter");
+const cartList = document.querySelector(".cart__list");
+
+updateCartCounter(parseInt(cartCounter.innerHTML));
+cart.addEventListener("click", (evt)=>{
+  evt.preventDefault();
+  let counter = parseInt(cartCounter.innerHTML);
+  if (counter > 0) {
+    cartList.classList.add("cart__list_active");
+  } else {
+    cartList.classList.remove("cart__list_active");
+  }
+});
+
+products.forEach(prod => {
+  const btnBuy = prod.querySelector(".btn_buy")
+  btnBuy.addEventListener("click", (evt) => {
+    evt.preventDefault();
+    addToCart(prod, btnBuy);
+  });
+})
+
+function addToCart(prod, btnBuy) {
+  const prodImg = prod.querySelector(`.product__img`);
+
+  if (!btnBuy.classList.contains("_hold")) {
+    btnBuy.classList.add("_hold");
+    
+    const prodClone = prodImg.cloneNode(true);
+    prodClone.classList.add("fly");
+    prodClone.style.cssText = 
+    `
+    width: ${prodImg.offsetWidth}px;
+    height: ${prodImg.offsetHeight}px;
+    top: ${prodImg.getBoundingClientRect().top}px;
+    left: ${prodImg.getBoundingClientRect().left}px;
+    `;
+    document.body.append(prodClone);
+    prodClone.style.cssText = 
+    `
+    width: 1px;
+    height: 1px;
+    top: ${cart.getBoundingClientRect().top}px;
+    left: ${cart.getBoundingClientRect().left}px;
+    opacity: 0;
+    `;
+
+    prodClone.addEventListener("transitionend", function(){
+      if(prodClone.classList.contains("fly")) {
+        prodClone.remove();
+      }
+    });
+
+    btnBuy.classList.remove("_hold");
+  }
+  createCartItem(prod);
+  updateCartCounter(parseInt(cartCounter.innerHTML)+1);
+}
+
+function createCartItem (prod){
+  const prodImg = prod.querySelector(`.product__img`);
+  const prodTitle = prod.querySelector(`.product__title`); 
+  let cartProduct = document.createElement("li");
+  cartProduct.classList.add("cart-product");
+  cartProduct.innerHTML = 
+  `
+    <a href="#" class="cart-product__image">${prodImg.outerHTML}</a>
+    <div class="cart-product__content">
+      <a href="#" class="cart-product__title"> ${prodTitle.innerHTML}</a>
+      <div class="cart-product__quantity">Quantity:<span>1</span></div>
+      <a href="#"class="cart-product__delete">Delete</a>
+    </div>
+  `;
+  cartList.appendChild( cartProduct);
+
+  let deleteBtn = cartProduct.querySelector(".cart-product__delete");
+  deleteBtn.addEventListener("click", evt=>{
+    evt.preventDefault();
+    deleteBtn.closest(".cart-product").remove();
+    updateCartCounter(parseInt(cartCounter.innerHTML)-1);
+  })
+}
+
+function updateCartCounter (counter) {
+  console.log("run updateCartCounter");
+  cartCounter.innerHTML = counter;
+  
+  if (counter == 0) {
+    cartCounter.style.cssText = 
+    'opacity: 0;'
+  } else {
+    cartCounter.style.cssText = 
+    'opacity: 1;'
+  };
 }
