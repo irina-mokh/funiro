@@ -338,7 +338,6 @@ function createCartItem (prod){
 }
 
 function updateCartCounter (counter) {
-  console.log("run updateCartCounter");
   cartCounter.innerHTML = counter;
   
   if (counter == 0) {
@@ -349,3 +348,15 @@ function updateCartCounter (counter) {
     'opacity: 1;'
   };
 }
+
+// Footer menu
+
+let accordArrows = document.querySelectorAll(".footer__arrow");
+
+accordArrows.forEach(accordArrow=>{
+   accordArrow.addEventListener("click", (evt)=>{
+    evt.preventDefault();
+    accordArrow.classList.toggle("footer__arrow_active");
+     accordArrow.nextElementSibling.classList.toggle("footer__menu_active");
+   })
+ })
