@@ -1385,7 +1385,8 @@
   }
 
   .footer__menu {
-    display: block;
+    overflow: visible;
+    max-height: 100%;
   }
   .email-input {
     min-width: 242px;
